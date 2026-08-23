@@ -1,154 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { projectsData } from '../constants';
 
-const projects = [
-   
-   {
-  id: 1,
-  title: "Black Swan",
-  subtitle: "AI-Powered Financial Market Intelligence & Risk Analysis Platform",
-  achievement: "🏆 Honourable Mention — Qdrant Hackathon 2026",
-  isBlackSwan: true,
-  blog: "https://qdrant.tech/blog/vector-space-hackathon-winners-2026/#black-swan-yusra",
-  desc: "An AI-powered financial intelligence platform that analyzes market data, detects unusual patterns, and provides context-aware insights using advanced AI and vector search.",
-  fullDesc: "Black Swan is an AI-powered financial market intelligence platform built to identify and analyze unusual market events and potential black swan scenarios. The system combines financial data with AI-powered reasoning and semantic search to help users understand market movements, risks, and emerging anomalies. Qdrant Vector Database powers the semantic search and retrieval layer, while FastAPI provides the backend and Next.js, React, and Tailwind CSS power the frontend. The project was selected for an Honourable Mention at the Qdrant Hackathon 2026, recognizing its use of vector search and AI to address financial intelligence and risk analysis.",
-  image: "/images/swan.png",
-  tags: [
-    "🏆 Qdrant Hackathon — Honourable Mention",
-    "AI",
-    "Qdrant Vector DB",
-    "FastAPI",
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Financial Analytics",
-    "RAG",
-    "Semantic Search"
-  ],
-  link: "YOUR_BLACK_SWAN_DEPLOYED_LINK",
-  github: "YOUR_BLACK_SWAN_GITHUB_LINK"
-},
-{
-    id: 3,
-    title: "Nexa Support",
-    subtitle: "AI-Powered Multi-Channel Customer Support System",
-    desc: "AI-powered multi-channel customer support with smart automation and escalation",
-    fullDesc:"Nexa Support is an AI-powered 24/7 customer support platform developed for Hackathon 5 that automates customer queries across Email, WhatsApp, and Web Forms. It acts as a virtual support agent that converts user queries into tickets, generates intelligent responses using Google Gemini 2.5 Flash, and resolves over 85% of issues automatically while escalating complex cases to human agents. The system ensures fast response times, efficient ticket management, and seamless multi-channel communication, making it a scalable and cost-effective solution for modern support systems.",  
-    image: "/images/nexa.png",
-     tags: ["FastAPI", "Python", "Nextjs", "PostgreSQl", "Kafka", "Gemini", "Meta API", "Docker","Kubernetes"],
-    link: "https://www.linkedin.com/posts/yusra-fatima-245967366_nexa-support-hackathon-5-project-nexa-support-ugcPost-7439130898689699840-Zc4H?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFrpIpUB1208pyjyqz7Ly9_BYNFRuAZwnlg",
-    github: "#"
-   
-  },
- 
-{
-  id: 3,
-  title: "Session X",
-  subtitle: "Smart Global Market Sessions & Trading Intelligence Platform",
-  desc: "A real-time trading intelligence platform that helps traders track global market sessions, ICT Kill Zones, market overlaps, and weekly candle openings across different time zones.",
-  fullDesc: "Session X is a smart trading intelligence platform designed to help traders monitor global financial market sessions from a single interface. It provides real-time clocks for major trading markets, including New York, London, Tokyo, and Sydney, while automatically handling time-zone differences and daylight saving time. The platform also highlights ICT Kill Zones, session overlaps, market open and close times, and weekly FX candle openings. An intelligent notification system provides timely alerts for important trading events, with Firebase Cloud Messaging and PWA support enabling push notifications across devices. The application was built with Next.js, React, TypeScript, and Tailwind CSS, with Firebase used for notifications and backend services and Twelve Data integrated for market data.",
-  image: "/images/session.png",
-  tags: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "Firebase",
-    "FCM Push Notifications",
-    "PWA",
-    "Twelve Data API",
-    "Trading Sessions",
-    "ICT Kill Zones"
-  ],
-  link: "https://sessionx-trading.vercel.app/",
-  github: "YOUR_SESSION_X_GITHUB_LINK"
-},
-{
-  id: 4,
-  title: "Marvel Saga",
-  subtitle: "Interactive Marvel Cinematic Universe Discovery Platform",
-  desc: "A full-featured Marvel fan platform with authentication, interactive quizzes, MCU timelines, movie discovery, and Marvel news — bringing the entire Marvel experience into one interactive web application.",
-  fullDesc: "Marvel Saga is an interactive web platform built for Marvel fans to explore the Marvel Cinematic Universe in one place. The platform includes user authentication and login functionality, allowing users to access the application's personalized features. Users can explore Marvel movies and upcoming releases, read Marvel-related blogs and news, test their knowledge through interactive quizzes, and navigate the MCU through a chronological timeline. The project combines modern frontend development with authentication, responsive UI design, structured content management, and interactive user experiences to create a complete Marvel-focused entertainment platform.",
-  image: "/images/marvel.png",
-  tags: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "Authentication",
-    "Interactive Quiz",
-    "MCU Timeline",
-    "Marvel Movies",
-    "Blog Platform",
-    "Responsive Design"
-  ],
-  link: "https://marvel-sagaa.vercel.app/",
-  github: "YOUR_MARVEL_SAGA_GITHUB_LINK"
-},
-  
-{
-  id: 2,
-  title: "Rescue Nest",
-  subtitle: "AI-Powered Wildlife Rescue & Emergency Response Platform",
-  desc: "An AI-powered platform designed to connect wildlife in need with rescuers, organizations, and communities through intelligent reporting, location-based coordination, and real-time emergency response.",
-  fullDesc: "Rescue Nest is an AI-powered wildlife rescue and emergency response platform built to make reporting, locating, and coordinating wildlife rescues faster and more efficient. Users can report injured, endangered, or stranded animals, provide their location and relevant details, and connect with nearby rescuers or organizations. The platform features an interactive map for location-based rescue coordination and an AI-powered system to assist with animal identification, situation assessment, and rescue guidance. The frontend was developed using Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, Framer Motion, and Leaflet, while the backend was built with FastAPI. Rescue Nest demonstrates practical experience in AI integration, geospatial technology, full-stack development, and technology-driven social impact.",
-  image: "/images/rescue.png",
-  tags: [
-    "AI",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "FastAPI",
-    "Leaflet",
-    "Geolocation",
-    "Wildlife Rescue"
-  ],
-  link: "YOUR_RESCUE_NEST_DEPLOYED_LINK",
-  github: "YOUR_RESCUE_NEST_GITHUB_LINK"
-},
-  {
-    id: 2,
-    title: "TaskPilot",
-    subtitle: "Cloud-Native Event-Driven Microservices Productivity Platform",
-    desc: "A sophisticated chatbot capable of context-aware responses, fast reasoning, and seamless scalability using state-of-the-art LLMs.",
-    fullDesc: "This project involves building a production-grade chatbot using OpenAI's GPT-4. It features a retrieval-TaskPilot, a cloud-native productivity application that evolved from a monolithic FastAPI backend into a scalable microservices architecture. The system features task management with authentication (JWT and Google OAuth), and was refactored into independent services (task, audit, reminder, recurring) communicating through an event-driven architecture using Dapr and Kafka (Redpanda). The frontend was developed with Next.js and Tailwind CSS, while the backend leveraged FastAPI and SQLModel. The entire application was containerized with Docker and deployed on Kubernetes (Minikube for local development), demonstrating real-world skills in distributed systems, async communication, and cloud deployment. generation (RAG) pipeline to provide context-aware answers from a custom knowledge base. The backend is built with FastAPI for high performance, and the frontend uses React for a smooth user experience.",
-    image: "/images/taskpilot.png",
-    tags: ["Gemini", "Vector DB", "FastAPI","JWT, Google OAuth","Kubernetes (Minikube, AKS/GKE ready)", "Docker, Docker Compose","Kafka / Redpanda"],
-    link: "https://task-pilot-inky.vercel.app/",
-    github: "https://github.com/Usrafatima/To-do-app/tree/main"
-  },
-  
-  
-  {
-    id: 5,
-    title: "Autonomous 24/7 AI Workflow Automation Platform",
-    subtitle: "24/7 AI-powered workflow automation system",
-    desc: "**An autonomous AI system that monitors, plans, and executes business tasks across multiple platforms with minimal human intervention**",
-    fullDesc: "This project focuses on building an AI Employee that works 24/7 to automate core business workflows across platforms like Gmail, WhatsApp, and LinkedIn. It continuously monitors incoming data, understands tasks using an AI reasoning engine, and executes actions such as replying to emails, qualifying leads, scheduling meetings, and generating or posting content. The system includes a human-in-the-loop approval layer for sensitive operations, ensuring both automation and control, and runs on a scheduled cycle with zero manual intervention while maintaining detailed logs for transparency and tracking. By automating repetitive tasks, it significantly improves efficiency and allows greater focus on strategy and growth. The tech stack includes Python for core logic, FastAPI for backend and APIs, Playwright for browser automation, Gemini AI for reasoning and task understanding, Windows Task Scheduler for continuous execution, and Obsidian for logging and dashboard visualization.",
-    image: "/images/post.png",
-    tags: ["Python", "FastAPI", "Obsidian", "Gemini", "Playwright", "Windows Task Scheduler", ],
-    link: "https://www.linkedin.com/posts/yusra-fatima-245967366_ai-automation-businessautomation-ugcPost-7433845662045061120-4pBu?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFrpIpUB1208pyjyqz7Ly9_BYNFRuAZwnlg",
-    github: "https://www.linkedin.com/posts/yusra-fatima-245967366_ai-automation-businessautomation-ugcPost-7433845662045061120-4pBu?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFrpIpUB1208pyjyqz7Ly9_BYNFRuAZwnlg"
-  },
-  {
-    id: 4,
-    title: "Humanoid-Robot-Book",
-    subtitle: "AI-Powered Content Creation",
-    desc: "Generate entire books or high-quality long-form content from simple prompts.",
-    fullDesc: "Physical AI & Humanoid Robotics is an interactive AI-powered learning platform designed to teach the fundamentals of embodied AI and robotics through a modern, hands-on approach. Built for a hackathon, the project transforms traditional static content into a dynamic learning experience by combining a structured curriculum with an intelligent RAG-based chatbot that provides real-time explanations, translations, and contextual assistance. The platform covers key topics such as sensors, control systems, ROS2, simulation environments, and Vision-Language-Action models, while also offering practical coding examples to reinforce learning. Developed using Next.js, React, and Tailwind CSS, and deployed on Vercel, it functions as a complete AI-native educational ecosystem that bridges the gap between theory and real-world robotics, making complex concepts more accessible, interactive, and engaging for learners.",
-    image: "/images/humanoidbook.png",
-    tags: ["LLMs", "Rag Chatbot", "API","VectorDb","Spec-Driven Development", "Gemini","Nextjs", "Tailwind"],
-    link: "https://humaoid-robot-book-q6en.vercel.app/",
-    github: "https://github.com/Usrafatima/Humanoid-robot-book"
-  },
-  
-];
+const projects = projectsData;
 
 const Modal = ({ project, isOpen, onClose }) => {
-  if (!isOpen) return null;
+  const navigate = useNavigate();
 
   // Prevent scroll when modal is open
   useEffect(() => {
+    if (!isOpen || !project) return;
     document.body.style.overflow = 'hidden';
     const header = document.querySelector('header');
     if (header) header.style.display = 'none';
@@ -156,7 +17,16 @@ const Modal = ({ project, isOpen, onClose }) => {
       document.body.style.overflow = 'unset';
       if (header) header.style.display = '';
     };
-  }, []);
+  }, [isOpen, project]);
+
+  if (!isOpen || !project) return null;
+
+  const handleUnavailableNav = (platform) => {
+    onClose();
+    navigate(`/projects/unavailable/${platform}?project=${encodeURIComponent(project.title)}`);
+  };
+
+  const hasLiveDemo = project.liveDemo && project.liveDemo.trim() !== '' && !project.liveDemo.includes('linkedin.com') && !project.liveDemo.includes('YOUR_RESCUE_NEST');
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-2 sm:p-4 md:p-8">
@@ -170,7 +40,7 @@ const Modal = ({ project, isOpen, onClose }) => {
       <div className="relative w-full max-w-4xl max-h-[95vh] bg-[#0e0e10] border border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden flex flex-col shadow-2xl animate-in fade-in zoom-in duration-300">
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 p-2.5 rounded-full bg-black/60 border border-white/20 hover:bg-white/15 text-white transition-colors backdrop-blur-sm"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 p-2.5 rounded-full bg-black/60 border border-white/20 hover:bg-white/15 text-white transition-colors backdrop-blur-sm cursor-pointer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -202,18 +72,92 @@ const Modal = ({ project, isOpen, onClose }) => {
                 <div className="space-y-4">
                   <h4 className="text-white font-bold text-base sm:text-lg">Links</h4>
                   <div className="flex flex-col gap-3">
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 px-5 py-3 rounded-xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition-colors text-sm sm:text-base">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                      Live Demo
-                    </a>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-colors text-sm sm:text-base">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                      Source Code
-                    </a>
+                    {/* Live Demo Link */}
+                    {hasLiveDemo && (
+                      <a 
+                        href={project.liveDemo} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex items-center justify-between px-5 py-3 rounded-xl bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition-colors text-sm sm:text-base"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                          <span>Live Demo</span>
+                        </div>
+                        <span className="text-xs font-mono">↗</span>
+                      </a>
+                    )}
+
+                    {/* GitHub Link or Status Page */}
+                    {project.github ? (
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex items-center justify-between px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 hover:border-white/20 transition-colors text-sm sm:text-base"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                          </svg>
+                          <span>GitHub Source</span>
+                        </div>
+                        <span className="text-xs font-mono text-white/50">↗</span>
+                      </a>
+                    ) : (
+                      <button 
+                        onClick={() => handleUnavailableNav('github')} 
+                        className="flex items-center justify-between px-5 py-3 rounded-xl bg-white/5 border border-yellow-500/20 text-white font-bold hover:bg-yellow-500/10 hover:border-yellow-500/40 transition-colors text-sm sm:text-base cursor-pointer text-left group/btn"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                          </svg>
+                          <span>GitHub <span className="text-xs font-normal font-mono text-yellow-400/80">(In Progress)</span></span>
+                        </div>
+                        <span className="text-xs font-mono text-yellow-400 group-hover/btn:translate-x-1 transition-transform">Status →</span>
+                      </button>
+                    )}
+
+                    {/* LinkedIn Link or Status Page */}
+                    {project.linkedin ? (
+                      <a 
+                        href={project.linkedin} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex items-center justify-between px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 hover:border-white/20 transition-colors text-sm sm:text-base"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <svg className="w-4 h-4 text-[#0077b5]" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                          </svg>
+                          <span>LinkedIn Showcase</span>
+                        </div>
+                        <span className="text-xs font-mono text-white/50">↗</span>
+                      </a>
+                    ) : (
+                      <button 
+                        onClick={() => handleUnavailableNav('linkedin')} 
+                        className="flex items-center justify-between px-5 py-3 rounded-xl bg-white/5 border border-blue-500/20 text-white font-bold hover:bg-blue-500/10 hover:border-blue-500/40 transition-colors text-sm sm:text-base cursor-pointer text-left group/btn"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <svg className="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                          </svg>
+                          <span>LinkedIn <span className="text-xs font-normal font-mono text-blue-400/80">(Coming Soon)</span></span>
+                        </div>
+                        <span className="text-xs font-mono text-blue-400 group-hover/btn:translate-x-1 transition-transform">Status →</span>
+                      </button>
+                    )}
+
+                    {/* Blog Link */}
                     {project.blog && (
-                      <a href={project.blog} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-colors text-sm sm:text-base">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                        Read Blog
+                      <a href={project.blog} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-colors text-sm sm:text-base">
+                        <div className="flex items-center gap-2.5">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                          <span>Read Blog</span>
+                        </div>
+                        <span className="text-xs font-mono text-white/50">↗</span>
                       </a>
                     )}
                   </div>
@@ -229,6 +173,7 @@ const Modal = ({ project, isOpen, onClose }) => {
 
 const ProjectCard = ({ project, onClick }) => {
   const cardRef = React.useRef(null);
+  const navigate = useNavigate();
 
   const handleMouseMove = (e) => {
     const card = cardRef.current;
@@ -238,6 +183,24 @@ const ProjectCard = ({ project, onClick }) => {
     const y = e.clientY - rect.top;
     card.style.setProperty("--mouse-x", `${x}px`);
     card.style.setProperty("--mouse-y", `${y}px`);
+  };
+
+  const handleGitHubClick = (e) => {
+    e.stopPropagation();
+    if (project.github && project.github.trim() !== '') {
+      window.open(project.github, '_blank', 'noopener,noreferrer');
+    } else {
+      navigate(`/projects/unavailable/github?project=${encodeURIComponent(project.title)}`);
+    }
+  };
+
+  const handleLinkedInClick = (e) => {
+    e.stopPropagation();
+    if (project.linkedin && project.linkedin.trim() !== '') {
+      window.open(project.linkedin, '_blank', 'noopener,noreferrer');
+    } else {
+      navigate(`/projects/unavailable/linkedin?project=${encodeURIComponent(project.title)}`);
+    }
   };
 
   return (
@@ -260,40 +223,27 @@ const ProjectCard = ({ project, onClick }) => {
           {/* Swan Silhouette & Bow */}
           <div className="relative">
             <svg width="90" height="68" viewBox="0 0 90 68" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
-              {/* Swan body - subtle dark silhouette with faint cyan edge glow */}
               <ellipse cx="45" cy="42" rx="32" ry="13" fill="rgba(20,20,22,0.85)" stroke="rgba(0,242,255,0.08)" strokeWidth="0.5"/>
-              {/* Neck curve */}
               <path d="M58 40 C58 32, 50 22, 42 18 C38 16.5, 36 15, 35 13.5" stroke="rgba(20,20,22,0.9)" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
-              {/* Head */}
               <ellipse cx="34.5" cy="12.5" rx="4" ry="3" fill="rgba(20,20,22,0.9)"/>
-              {/* Beak - subtle cyan accent */}
               <path d="M30.5 12.5 L27 13.5 L30.5 14" fill="rgba(0,180,200,0.25)" stroke="rgba(0,200,220,0.15)" strokeWidth="0.3"/>
-              {/* Eye - tiny cyan dot */}
               <circle cx="33" cy="12" r="0.6" fill="rgba(0,242,255,0.5)"/>
-              {/* Left wing feathers */}
               <path d="M35 38 C22 30, 12 26, 8 24" stroke="rgba(15,15,17,0.7)" strokeWidth="1.5" fill="none"/>
               <path d="M33 40 C20 32, 9 28, 5 27" stroke="rgba(12,12,14,0.6)" strokeWidth="1.2" fill="none"/>
               <path d="M31 42 C18 34, 7 30, 3 29.5" stroke="rgba(10,10,12,0.5)" strokeWidth="1" fill="none"/>
-              {/* Right wing feathers - mirrored */}
               <path d="M55 38 C68 30, 78 26, 82 24" stroke="rgba(15,15,17,0.7)" strokeWidth="1.5" fill="none"/>
               <path d="M57 40 C70 32, 81 28, 85 27" stroke="rgba(12,12,14,0.6)" strokeWidth="1.2" fill="none"/>
               <path d="M59 42 C72 34, 83 30, 87 29.5" stroke="rgba(10,10,12,0.5)" strokeWidth="1" fill="none"/>
-              {/* Satin bow - refined, small, centered beneath body */}
               <g transform="translate(45, 54)">
-                {/* Bow center knot */}
                 <ellipse cx="0" cy="0" rx="1.8" ry="1.3" fill="rgba(18,18,20,0.9)" stroke="rgba(0,200,220,0.12)" strokeWidth="0.3"/>
-                {/* Left loop */}
                 <path d="M-1.5 0 C-4 -2.5, -8 -2.5, -9 0 C-8 2.5, -4 2.5, -1.5 0Z" fill="rgba(15,15,18,0.85)" stroke="rgba(0,200,220,0.1)" strokeWidth="0.3"/>
-                {/* Right loop */}
                 <path d="M1.5 0 C4 -2.5, 8 -2.5, 9 0 C8 2.5, 4 2.5, 1.5 0Z" fill="rgba(15,15,18,0.85)" stroke="rgba(0,200,220,0.1)" strokeWidth="0.3"/>
-                {/* Left ribbon tail */}
                 <path d="M-1.5 0.5 C-3 3, -5.5 5, -6.5 7" stroke="rgba(12,12,15,0.7)" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
-                {/* Right ribbon tail */}
                 <path d="M1.5 0.5 C3 3, 5.5 5, 6.5 7" stroke="rgba(12,12,15,0.7)" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
               </g>
             </svg>
 
-            {/* Subtle Cyan Particles / Glowing Specks */}
+            {/* Subtle Cyan Particles */}
             <div className="absolute inset-0">
               {[
                 { x: -15, y: 10, size: 2, opacity: 0.4, animDelay: '0s', animDur: '3.5s' },
@@ -320,7 +270,6 @@ const ProjectCard = ({ project, onClick }) => {
               ))}
             </div>
           </div>
-
         </div>
       )}
 
@@ -359,13 +308,47 @@ const ProjectCard = ({ project, onClick }) => {
           </div>
         </div>
 
-        {/* Tags */}
-        <div className="flex items-center justify-between gap-4 mt-auto">
-           <div className="flex flex-wrap gap-2">
-            {project.tags.slice(0, 3).map(tag => (
-              <span key={tag} className="text-[10px] text-white/30 font-mono">#{tag}</span>
+        {/* Tags and Quick Action Links */}
+        <div className="flex items-center justify-between gap-3 mt-auto pt-1">
+          <div className="flex flex-wrap gap-1.5 overflow-hidden">
+            {project.tags.slice(0, 2).map(tag => (
+              <span key={tag} className="text-[10px] text-white/35 font-mono truncate max-w-[130px]">#{tag}</span>
             ))}
-           </div>
+          </div>
+
+          <div className="flex items-center gap-1.5 shrink-0 z-20">
+            {/* GitHub Quick Button */}
+            <button
+              onClick={handleGitHubClick}
+              title={project.github ? "Open GitHub Repository" : "GitHub Repository (In Progress)"}
+              aria-label={project.github ? "GitHub Repository" : "GitHub Status"}
+              className={`size-8 rounded-lg border flex items-center justify-center transition-all duration-200 cursor-pointer ${
+                project.github 
+                  ? "bg-white/5 border-white/10 hover:border-cyan-400/60 hover:bg-cyan-500/10 text-white/70 hover:text-cyan-300"
+                  : "bg-white/5 border-white/10 hover:border-yellow-500/40 hover:bg-yellow-500/10 text-white/40 hover:text-yellow-300"
+              }`}
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+            </button>
+
+            {/* LinkedIn Quick Button */}
+            <button
+              onClick={handleLinkedInClick}
+              title={project.linkedin ? "Open LinkedIn Post" : "LinkedIn Post (Coming Soon)"}
+              aria-label={project.linkedin ? "LinkedIn Post" : "LinkedIn Status"}
+              className={`size-8 rounded-lg border flex items-center justify-center transition-all duration-200 cursor-pointer ${
+                project.linkedin 
+                  ? "bg-white/5 border-white/10 hover:border-[#0077b5]/80 hover:bg-[#0077b5]/10 text-white/70 hover:text-[#0077b5]"
+                  : "bg-white/5 border-white/10 hover:border-blue-400/40 hover:bg-blue-500/10 text-white/40 hover:text-blue-300"
+              }`}
+            >
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -411,14 +394,14 @@ const FeaturedProjects = () => {
             <button 
               onClick={handlePrev}
               disabled={currentPage === 0}
-              className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/50 hover:bg-white/20 hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/50 hover:bg-white/20 hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
             <button 
               onClick={handleNext}
               disabled={currentPage >= maxPage}
-              className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/50 hover:bg-white/20 hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/50 hover:bg-white/20 hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
